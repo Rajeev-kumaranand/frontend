@@ -12,7 +12,7 @@ import Mainprofile from './Components/Main/Mainprofile';
 import SearchedUser from './Components/Main/SearchedUser';
 import toast, { Toaster } from 'react-hot-toast';
 
-
+// Nothing
 const router = createBrowserRouter([
   {
     path: "/",

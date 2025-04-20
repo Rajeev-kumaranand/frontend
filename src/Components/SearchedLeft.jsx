@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
+import { api } from '../api'
 
 function SearchedLeft() {
 
@@ -21,7 +22,7 @@ function SearchedLeft() {
         e.preventDefault()
         console.log(username)
         try {
-            const res = await axios.post("http://localhost:3000/api/searchuser", { username }, { withCredentials: true })
+            const res = await api.post("/api/searchuser", { username }, { withCredentials: true })
             console.log(res.data)
             if (res.data.message === "notuser") {
                 // setSearchedUser("notuser")
