@@ -89,62 +89,100 @@ function Profile() {
     }
   }
   return (
-    <div className='w-2/4 h-full bg-blue-100 text-black' >
-      {/* <button className='py-2 px-3 border-none bg-red-900 text-white font-bold rounded' onClick={logout} >LOG OUT</button> */}
-      {/* <div>
-        <Link to="/profileupdate" >Profile</Link>
-      </div> */}
-      <div className=' flex bg-white rounded-2xl mt-5 w-full m-auto ' >
-        <div className=' h-15 w-15 rounded-[50%] overflow-hidden mt-10 ml-5 '>
-          <img className='h-full w-full object-cover object-center' src={`${import.meta.env.VITE_IMAGE_URL}${user?.profile}`} alt="Profile" />
+  <div className='w-full sm:w-2/4 h-full bg-blue-100 text-black px-2 mt-6 sm:mt-0 '>
+    <div className='flex flex-col sm:flex-row bg-white rounded-2xl mt-5 w-full m-auto'>
+      <div className='h-16 w-16 sm:h-15 sm:w-15 rounded-[50%] overflow-hidden mt-5 sm:mt-10 sm:ml-5 mx-auto sm:mx-0'>
+        <img
+          className='h-full w-full object-cover object-center'
+          src={`${import.meta.env.VITE_IMAGE_URL}${user?.profile}`}
+          alt="Profile"
+        />
+      </div>
+
+      <form className='mt-6 sm:mt-10 w-full sm:w-auto sm:m-auto' onSubmit={handleClick} encType="multipart/form-data">
+        <textarea
+          className='w-full sm:w-[80vh] h-24 border-none block mb-5 px-3 py-2 resize-none outline-none bg-gradient-to-r from-blue-200 to-purple-200 rounded-md'
+          onChange={handlechange}
+          value={post.content}
+          placeholder='Enter Content'
+          name='content'
+        ></textarea>
+
+        <div className='flex flex-wrap justify-between items-center gap-3 mb-5'>
+          <label htmlFor="file-upload" className="cursor-pointer overflow-hidden flex items-center gap-1">
+            <img src="photoUpload.svg" alt="Upload Icon" className="w-6 h-6" /> <span>{image === null ? "Photo" : "Selected"}</span>
+          </label>
+          <label htmlFor="file-upload" className="cursor-pointer overflow-hidden flex items-center gap-1">
+            <img src="videoUpload.svg" alt="Upload Icon" className="w-6 h-6" /> <span>Video</span>
+          </label>
+          <input id="file-upload" type="file" name='post' className="hidden" onChange={(e) => setImage(e.target.files[0])} />
+          <input type="submit" value="POST" className='cursor-pointer py-2 px-4 bg-red-400 text-black font-bold rounded' />
         </div>
-        <form className='mt-10 m-auto ' action="" onSubmit={ handleClick } encType="multipart/form-data"  >
-          <textarea className='w-[80vh] h-12 border-none block mb-5 px-3 py-2 resize-none  outline-none  bg-gradient-to-r from-blue-200 to-purple-200  rounded-md ' onChange={handlechange} value={post.content} placeholder='Enter Content' name='content'></textarea>
-          <div className=' flex justify-between items-baseline mb-5 ' >
-            <label htmlFor="file-upload" className="cursor-pointer overflow-hidden ">
-              <img src="photoUpload.svg" alt="Upload Icon" className="w-7 h-7 inline " /> <span>{image === null ? "Photo" : "Selected"}</span>
-            </label>
-            <label htmlFor="file-upload" className="cursor-pointer overflow-hidden ">
-              <img src="videoUpload.svg" alt="Upload Icon" className="w-7 h-7 inline " /> <span>Video</span>
-            </label>
-            <input id="file-upload" type="file" name='post' className="hidden" onChange={(e) => setImage(e.target.files[0])} />
-            <input type="submit" value="POST" className=' cursor-pointer py-2 px-3 border-none bg-red-400 text-black font-bold rounded' />
-          </div>
-        </form>
-      </div>
-
-      <div className='flex gap-10 flex-wrap mt-10 mb-10 ' >
-        {alllpost.map((post) => (
-          <div key={post._id} className='p-3 bg-white rounded-2xl w-[90vh] m-auto  ' >
-            <div className=' w-[85vh] h-80 rounded-2xl overflow-hidden flex flex-col items-center m-auto ' >
-              <img className='h-full w-full object-cover object-center' src={`${import.meta.env.VITE_IMAGE_URL}${post.postimg}`} alt="" />
-            </div>
-            <div className=' mt-2 ml-3 text-gray-500 ' > {post.content} </div>
-
-            <div className=' flex justify-between ' >
-              <div className='flex gap-5 mt-4 ' >
-                <button className=' text-blsck ' onClick={() => like(post?._id)} > {post.likes.length} <img className='w-7 h-7 inline cursor-pointer ' src={post.likes.indexOf(user?._id) === -1 ? "unliked.png" : "liked.png"} alt="" /></button>
-                <img className='w-7 h-7 cursor-pointer' src="comment.svg" alt="" />
-                <img className='w-7 h-7 cursor-pointer' src="share.svg" alt="" />
-              </div>
-              <div className=' relative inline-block group ' >
-                <button><img className='w-7 h-7 cursor-pointer' src="threedot.svg" alt="" /></button>
-                <div className="absolute right-0 top-5 hidden mt-2 w-32 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:block">
-                  <ul className="text-sm">
-                    {/* <li><Link className ="block px-4 py-2 text-gray-700 hover:bg-gray-100" to={`/editpost/${post._id}`}>Edit</Link></li> */}
-                    <li><button className ="block px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={() => { togglePostComp() , setEditPostId(post?._id) , setPostContent(post?.content) , setSendPostImg(`${import.meta.env.VITE_IMAGE_URL}${post.postimg}`) }} >Edit</button></li>
-                    <li><button className ="block px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={() => Deletepost(post._id)} >Delete</button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        )).reverse()}
-      </div>
-       { updatePostCompVis && <Editpost onclose={togglePostComp} postid={editPostId} postcontent={postContent} postimg ={sendPostImg} />}
+      </form>
     </div>
-  )
+
+    <div className='flex flex-col items-center gap-10 mt-10 mb-10'>
+      {alllpost.map((post) => (
+        <div key={post._id} className='p-3 bg-white rounded-2xl w-full sm:w-[90vh]'>
+          <div className='w-full sm:w-[85vh] h-60 sm:h-80 rounded-2xl overflow-hidden flex flex-col items-center m-auto'>
+            <img
+              className='h-full w-full object-cover object-center'
+              src={`${import.meta.env.VITE_IMAGE_URL}${post.postimg}`}
+              alt=""
+            />
+          </div>
+          <div className='mt-2 ml-2 sm:ml-3 text-gray-500'>{post.content}</div>
+
+          <div className='flex justify-between items-center mt-4 px-2'>
+            <div className='flex gap-4'>
+              <button className='text-black' onClick={() => like(post?._id)}>
+                {post.likes.length}
+                <img className='w-6 h-6 inline ml-1 cursor-pointer' src={post.likes.indexOf(user?._id) === -1 ? "unliked.png" : "liked.png"} alt="" />
+              </button>
+              <img className='w-6 h-6 cursor-pointer' src="comment.svg" alt="" />
+              <img className='w-6 h-6 cursor-pointer' src="share.svg" alt="" />
+            </div>
+
+            <div className='relative inline-block group'>
+              <button><img className='w-6 h-6 cursor-pointer' src="threedot.svg" alt="" /></button>
+              <div className="absolute right-0 top-5 hidden mt-2 w-32 bg-white border border-gray-300 rounded-lg shadow-lg group-hover:block z-10">
+                <ul className="text-sm">
+                  <li>
+                    <button
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      onClick={() => {
+                        togglePostComp();
+                        setEditPostId(post?._id);
+                        setPostContent(post?.content);
+                        setSendPostImg(`${import.meta.env.VITE_IMAGE_URL}${post.postimg}`);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </li>
+                  <li>
+                    <button className="block px-4 py-2 text-gray-700 hover:bg-gray-100" onClick={() => Deletepost(post._id)}>
+                      Delete
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )).reverse()}
+    </div>
+
+    {updatePostCompVis && (
+      <Editpost
+        onclose={togglePostComp}
+        postid={editPostId}
+        postcontent={postContent}
+        postimg={sendPostImg}
+      />
+    )}
+  </div>
+)
 }
 
 export default Profile

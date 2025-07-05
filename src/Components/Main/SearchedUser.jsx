@@ -12,9 +12,15 @@ function SearchedUser() {
   return (
     <>
     <div className='flex  bg-blue-100  ' >
-      <SearchedLeft/>
+      
+      {/* <div className='hidden' > */}
+      <SearchedLeft/>  
+      {/* </div> */}
       <SearchedMiddle id={id} />
-      <Othersection/>
+      
+      {/* <div className='hidden' > */}
+      <Othersection/> 
+      {/* </div> */}
     </div>
     </>
   )

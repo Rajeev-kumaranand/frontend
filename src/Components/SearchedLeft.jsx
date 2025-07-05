@@ -43,7 +43,7 @@ function SearchedLeft() {
     }
 
     return (
-        <div className='w-1/4 h-screen bg-blue-100 text-black sticky top-0' >
+        <div className='w-1/4 h-screen bg-blue-100 text-black sm:sticky sm:block hidden top-0' >
             <form className='bg-gradient-to-r from-blue-200 to-purple-200 rounded-[40px] mt-5 py-1  w-80 m-auto flex justify-between ' action="">
                 <input className=' ml-4 outline-none bg-transparent ' type="text" placeholder='Search User' onChange={handlechange} />
                 <button className='bg-red-400 p-2 rounded-4xl' onClick={handleclick} >

@@ -59,49 +59,86 @@ function Register() {
     }
   };
   return (
-    <div className='backdrop-blur-md h-screen pt-20  text-gray-700  ' >
-      <div className=' w-[30vw] bg-gradient-to-r from-blue-200 to-pink-200 m-auto rounded-2xl shadow-2xl p-10 ' >
-        <form action="" onSubmit={handleSubmit(handleclick)} className='flex flex-col ' >
-          <input {...register("name", {
+  <div className='backdrop-blur-md h-screen pt-20 text-gray-700 px-4'>
+    <div className='w-full sm:w-[30vw] bg-gradient-to-r from-blue-200 to-pink-200 m-auto rounded-2xl shadow-2xl p-6 sm:p-10'>
+      <form onSubmit={handleSubmit(handleclick)} className='flex flex-col'>
+        <input
+          {...register("name", {
             required: { value: true, message: "required" },
-            minLength: { value: 3, message: "min lenght 3" },
+            minLength: { value: 3, message: "min length 3" },
           })}
-            className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md '
-            type="text"
-            placeholder='Enter name'
-          />
-          {errors.name && <p className='text-red-500' >{errors.name.message}</p>}
-          <input {...register("username", {
+          className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md'
+          type="text"
+          placeholder='Enter name'
+        />
+        {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
+
+        <input
+          {...register("username", {
             required: { value: true, message: "required" },
-            minLength: { value: 3, message: "Min lenght 3" },
+            minLength: { value: 3, message: "Min length 3" },
           })}
-            className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md  ' type="text" placeholder='Enter username' name='username' />
-          {errors.username && <p className='text-red-500' >{errors.username.message}</p>}
-          <input {...register("email", {
-            required: { value: true, message: "required" },
-          })}
-            className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md  ' type="email" placeholder='Enter email' name='email' />
-          {errors.email && <p className='text-red-500' >{errors.email.message}</p>}
-          <input {...register("password", {
-            required: { value: true, message: "required" },
-          })}
-            className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md  ' type="password" placeholder='Enter password' name='password' />
-          {errors.password && <p className='text-red-500' >{errors.password.message}</p>}
-          <input {...register("age", {
+          className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md'
+          type="text"
+          placeholder='Enter username'
+          name='username'
+        />
+        {errors.username && <p className='text-red-500'>{errors.username.message}</p>}
+
+        <input
+          {...register("email", {
             required: { value: true, message: "required" },
           })}
-            className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md  ' type="number" placeholder='Enter age' name='age' />
-          {errors.age && <p className='text-red-500' >{errors.age.message}</p>}
-          {/* <input className='px-3 py-2 outline-none bg-red-500 rounded-md ' type="submit" value="Register" /> */}
-          <button className=' mt-5 px-30 py-3 text-white m-auto  bg-gradient-to-r from-blue-700 to-pink-500 rounded-md' type='submit' >Create Account</button>
-        </form>
-      </div>
-      <div className='m-auto w-90 flex flex-col items-center mt-10 '>
-                <div className='' >OR</div>
-                <button className=' mt-5 px-30 py-3 text-white m-auto  bg-gradient-to-r from-blue-700 to-pink-500 rounded-md' onClick={goToLogin}  >Login</button>
-                </div>
+          className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md'
+          type="email"
+          placeholder='Enter email'
+          name='email'
+        />
+        {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+
+        <input
+          {...register("password", {
+            required: { value: true, message: "required" },
+          })}
+          className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md'
+          type="password"
+          placeholder='Enter password'
+          name='password'
+        />
+        {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
+
+        <input
+          {...register("age", {
+            required: { value: true, message: "required" },
+          })}
+          className='px-3 py-2 outline-none bg-gray-200 w-full mt-5 rounded-md'
+          type="number"
+          placeholder='Enter age'
+          name='age'
+        />
+        {errors.age && <p className='text-red-500'>{errors.age.message}</p>}
+
+        <button
+          className='mt-5 px-10 py-3 text-white m-auto bg-gradient-to-r from-blue-700 to-pink-500 rounded-md'
+          type='submit'
+        >
+          Create Account
+        </button>
+      </form>
     </div>
-  )
+
+    <div className='m-auto w-full sm:w-90 flex flex-col items-center mt-10 px-4'>
+      <div>OR</div>
+      <button
+        className='mt-5 px-10 py-3 text-white m-auto bg-gradient-to-r from-blue-700 to-pink-500 rounded-md'
+        onClick={goToLogin}
+      >
+        Login
+      </button>
+    </div>
+  </div>
+);
+
 }
 
 export default Register
